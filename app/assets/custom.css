@@ -1,0 +1,33 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+.HeaderArea {
+    background-color: rgb(101, 188, 120);
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+}
+
+.MainArea {
+    background: #fff;
+    border:1px solid #ddd;
+    min-height: 200px;
+    padding: 20px 15px;
+}
+
+.FooterArea {
+    background-color: rgb(101, 188, 120);
+    color: #fff;
+    padding: 5px;
+    text-align: center;
+}
+
+.FooterArea p {
+    margin-bottom: 0px;
+}
+
+.userListButton {
+    margin-right: 20px;
+}
