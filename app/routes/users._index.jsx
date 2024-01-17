@@ -1,7 +1,10 @@
+import { Link, json } from "@remix-run/react";
+import Breadcumb from "../components/Breadcumb"
+
 import Header from "../components/Header"
 import Footer from "../components/Footer"
 import UserList from "../components/UserList"
-import { Link } from "@remix-run/react";
+import User from "~/models/User";
 
 export const meta = () => {
   return [
@@ -10,15 +13,17 @@ export const meta = () => {
   ];
 };
 
+export async function loader() {
+  const users = await User.find({});
+  return json(users);
+}
+
 export default function Index() {
   return (
     <div className="container">
       <Header></Header>
       <div className="MainArea">
-        <Link className="btn btn-primary userListButton" to="/users">User List</Link>
-        <Link className="btn btn-primary" to="/users/add">User Add</Link>
-        <br/>
-        <br/>
+        <Breadcumb></Breadcumb>
         <UserList></UserList>
       </div>
       <Footer></Footer>

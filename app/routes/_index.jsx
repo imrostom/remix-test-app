@@ -1,7 +1,6 @@
 import Header from "../components/Header"
 import Footer from "../components/Footer"
-import UserList from "../components/UserList"
-import { Link } from "@remix-run/react";
+import Breadcumb from "../components/Breadcumb"
 
 export const meta = () => {
   return [
@@ -14,12 +13,8 @@ export default function Index() {
   return (
     <div className="container">
       <Header></Header>
-      <div className="MainArea">
-        <Link className="btn btn-primary userListButton" to="/users">User List</Link>
-        <Link className="btn btn-primary" to="/users/add">User Add</Link>
-        <br />
-        <br />
-        <UserList></UserList>
+      <div className="MainArea HomePage">
+        <Breadcumb></Breadcumb>
       </div>
       <Footer></Footer>
     </div>

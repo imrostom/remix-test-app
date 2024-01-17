@@ -9,11 +9,16 @@ import {
   ScrollRestoration,
 } from "@remix-run/react";
 
-import customCssFile from "./assets/custom.css";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
+import "~/assets/custom.css";
 
 export const links: LinksFunction = () => [
-  { rel: "stylesheet", href: cssBundleHref },
-  { rel: "stylesheet", href: customCssFile }
+  ...(cssBundleHref
+    ? [{ rel: "stylesheet", href: cssBundleHref }]
+    : []),
 ];
 
 export default function App() {
@@ -32,6 +37,7 @@ export default function App() {
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
+        <ToastContainer/>
       </body>
     </html>
   );
