@@ -3,6 +3,8 @@ import Footer from "../components/Footer"
 import { Form, json, redirect, useLoaderData } from "@remix-run/react";
 import User from "../models/User"
 import Breadcumb from "../components/Breadcumb";
+import { toast } from "react-toastify";
+import userValidation from "../validations/userValidation"
 
 export const meta = () => {
   return [
@@ -15,14 +17,30 @@ export async function action({ params, request }) {
   const formData = await request.formData();
   const requestData = Object.fromEntries(formData);
 
-  const user = await User.findOneAndUpdate({_id: params.id}, requestData);
+  const validationResult = userValidation.validateForm(requestData);
+  if (validationResult.isValid) {
 
-  return redirect("/users");
+    await User.findOneAndUpdate({ _id: params.id }, requestData);
+
+    return json({ status: true, message: "User updated" });
+  }
+  return json({ status: false, message: "Please provide valid user data." });
 }
 
+export const clientAction = async ({ request, params, serverAction }) => {
+  const { status, message } = await serverAction();
+  if (status) {
+    toast.success("User updated!");
 
-export async function loader({params}) {
-  const user = await User.findOne({_id: params.id});
+    return redirect("/users");
+  } else {
+    toast.error(message);
+    return null;
+  }
+};
+
+export async function loader({ params }) {
+  const user = await User.findOne({ _id: params.id });
   return json(user);
 }
 
@@ -37,7 +55,7 @@ export default function Index() {
           <Breadcumb></Breadcumb>
 
           <div className="row">
-            <div className="col-sm-6">
+            <div className="col-sm-6 offset-3">
               <Form method="post">
                 <div className="mb-3">
                   <label htmlFor="name" className="form-label">Name</label>
@@ -52,7 +70,9 @@ export default function Index() {
                   <textarea className="form-control" id="address" name="address" placeholder="mirpur, dhaka, bangladesh" defaultValue={user.address}></textarea>
                 </div>
                 <div className="mb-3">
-                  <button className="btn btn-success" type="submit">Update User</button>
+                  <button className="btn btn-success" type="submit">
+                    <i class="fa-solid fa-user-pen"></i> Update User
+                  </button>
                 </div>
               </Form>
             </div>

@@ -8,7 +8,7 @@ const UserList = () => {
         <div className="row">
             <div className="col-sm-12">
                 {users.length ? (
-                    <table className="table table-striped">
+                    <table className="table table-striped table-bordered">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -26,8 +26,18 @@ const UserList = () => {
                                     <td>{user.email}</td>
                                     <td>{user.address}</td>
                                     <td>
-                                        <Link className="btn btn-success mx-1" to={`/users/${user._id}/edit`}>Edit</Link>
-                                        <Link className="btn btn-success" to={`/users/${user._id}/destroy`}>Delete</Link>
+                                        <Link className="btn btn-success mx-1" to={`/users/${user._id}/edit`}>
+                                            <i className="fa-solid fa-user-pen"></i>
+                                        </Link>
+                                        
+                                        <Link onClick={(event) => {
+                                            const response = confirm("Please confirm you want to delete this record.");
+                                            if (!response) {
+                                                event.preventDefault();
+                                            }
+                                        }} className="btn btn-danger" to={`/users/${user._id}/destroy`}>
+                                            <i className="fa-solid fa-user-minus"></i>
+                                        </Link>
                                     </td>
                                 </tr>
                             })}

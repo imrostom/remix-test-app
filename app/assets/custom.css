@@ -3,36 +3,35 @@
     padding: 0px;
 }
 
-.HeaderArea {
-    background-color: rgb(101, 188, 120);
+a {
     color: #fff;
-    padding: 10px;
+    text-decoration: none;
+}
+a:hover {
+    color: #fff;
+}
+
+.HeaderArea {
+    color: #fff;
+    padding: 20px 10px;
     text-align: center;
+    background-color: #198754;
 }
 
 .MainArea {
     background: #fff;
-    border:1px solid #ddd;
+    border:1px solid #198754;
     min-height: 200px;
     padding: 20px 15px;
 }
 
 .FooterArea {
-    background-color: rgb(101, 188, 120);
     color: #fff;
-    padding: 5px;
+    padding: 10px;
     text-align: center;
+    background-color: #198754;
 }
 
 .FooterArea p {
     margin-bottom: 0px;
-}
-
-.userListButton {
-    margin-right: 20px;
-}
-
-.HomePage {
-    text-align: center;
-    padding: 50px 0px;
 }
