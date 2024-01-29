@@ -7,6 +7,7 @@ a {
     color: #fff;
     text-decoration: none;
 }
+
 a:hover {
     color: #fff;
 }
@@ -20,7 +21,7 @@ a:hover {
 
 .MainArea {
     background: #fff;
-    border:1px solid #198754;
+    border: 1px solid #198754;
     min-height: 200px;
     padding: 20px 15px;
 }
@@ -34,4 +35,36 @@ a:hover {
 
 .FooterArea p {
     margin-bottom: 0px;
+}
+
+
+/* Contact Form */
+.contact-form form {
+    padding: 50px 100px;
+}
+
+.contact-form h3 {
+    text-align: center;
+    color: #0062cc;
+}
+
+.contact-form .btnContact {
+    width: 50%;
+    border: none;
+    border-radius: 1rem;
+    padding: 1.5%;
+    background: #dc3545;
+    font-weight: 600;
+    color: #fff;
+    cursor: pointer;
+}
+
+.btnContactSubmit {
+    width: 50%;
+    border-radius: 1rem;
+    padding: 1.5%;
+    color: #fff;
+    background-color: #0062cc;
+    border: none;
+    cursor: pointer;
 }
