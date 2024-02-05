@@ -1,4 +1,4 @@
-import { Form, useSubmit } from "@remix-run/react";
+import { Form } from "@remix-run/react";
 import Breadcumb from "../components/Breadcumb"
 
 import Header from "../components/Header"
@@ -14,7 +14,6 @@ import {
 
 
 export async function action({ params, request }) {
-  
   const uploadHandler = composeUploadHandlers(
     createFileUploadHandler({
       directory: "public/uploads",
@@ -23,9 +22,8 @@ export async function action({ params, request }) {
     createMemoryUploadHandler(),
   );
   const formData = await parseMultipartFormData(request, uploadHandler);
-
+  
   const image = formData.get("image");
-  console.log(image)
   if (!image || typeof image === "string") {
     return json({ error: "something wrong", imgSrc: null });
   }
@@ -35,17 +33,6 @@ export async function action({ params, request }) {
 }
 
 export default function Index() {
-  const submit  = useSubmit();
-
-  const handleFileUpload = (e) => {
-    console.log(e.currentTarget.files);
-    const formData = new FormData();
-    formData.append("image", e.currentTarget.files[0]);
-    submit(formData, { method: "post", encType: "multipart/form-data" });
-
-    // console.log(formData.get('image'));
-
-  }
 
   return (
     <div className="container">
@@ -55,7 +42,8 @@ export default function Index() {
         <div className="row">
           <div className="contact-form">
             <Form method="post" encType="multipart/form-data">
-              <input type="file" name="image" id="image" onChange={handleFileUpload}/>
+              <input type="file" name="image" id="image" />
+              <input type="submit" />
             </Form>
           </div>
         </div>

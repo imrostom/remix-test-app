@@ -21,7 +21,7 @@ const Breadcumb = () => {
                 </Link>
 
                 <Link className="btn btn-success mx-2" to="/users/profile">
-                    <i className="fa-solid fa-user-plus"></i> Image
+                    <i className="fa-solid fa-user-plus"></i> Profile
                 </Link>
 
                 <Link className="btn btn-success mx-2" to="/users/fetch">

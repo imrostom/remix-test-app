@@ -1,10 +1,11 @@
 import Header from "../components/Header"
 import Footer from "../components/Footer"
-import { Form, json, redirect, useLoaderData } from "@remix-run/react";
+import { Form, json, redirect, useLoaderData, useNavigate } from "@remix-run/react";
 import User from "../models/User"
 import Breadcumb from "../components/Breadcumb";
 import { toast } from "react-toastify";
 import userValidation from "../validations/userValidation"
+import { useEffect } from "react";
 
 export const meta = () => {
   return [
@@ -37,15 +38,29 @@ export const clientAction = async ({ request, params, serverAction }) => {
     toast.error(message);
     return null;
   }
-};
+}
 
-export async function loader({ params }) {
-  const user = await User.findOne({ _id: params.id });
-  return json(user);
+export async function loader({ request, params }) {
+  // return redirect("/users", 302);
+  // const url = new URL(request.url);
+
+  try {
+    const user = await User.findOne({ _id: params.id });
+    return json({status: true, data: user});
+  } catch (error) {
+    return json({status:  false, data: {}});
+  }
 }
 
 export default function Index() {
-  const user = useLoaderData();
+  const {status, data: user} = useLoaderData();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if(!status) {
+      return navigate('/users');
+    }
+  }, [status])
 
   return (
     <>
@@ -71,7 +86,7 @@ export default function Index() {
                 </div>
                 <div className="mb-3">
                   <button className="btn btn-success" type="submit">
-                    <i class="fa-solid fa-user-pen"></i> Update User
+                    <i className="fa-solid fa-user-pen"></i> Update User
                   </button>
                 </div>
               </Form>
