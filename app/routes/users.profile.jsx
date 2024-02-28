@@ -22,6 +22,7 @@ export async function action({ params, request }) {
     }),
     createMemoryUploadHandler(),
   );
+  
   const formData = await parseMultipartFormData(request, uploadHandler);
 
   const image = formData.get("image");
